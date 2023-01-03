@@ -1,18 +1,19 @@
 <?php
 include 'conexao.php';
+session_start();
 
-
-$nome = mysqli_real_escape_string($conexao, $_POST['nome']);
+$name = mysqli_real_escape_string($conexao, $_POST['nome']);
 $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
-$senha = mysqli_real_escape_string($conexao, $_POST['senha']);
-
-
-$query = 'insert into usuario (nome, usr, senha) values ('$nome', '$usuario', '$senha')';
+$senha = mysqli_real_escape_string($conexao, $_POST['password']);
+$criptografar = md5($senha);
+$query = "insert into usuario (nome, user, senha) values ('$name', '$usuario', '$criptografar')";
 $conexao->query($query);
 
 if($conexao->query($query) == true){
     $_SESSION['CADASTRO_EFETUADO'] = TRUE;
+    $_SESSION['nome'] = $name;
 }
 
-header('Location: ../index.php');
+header('Location: ../page.php');
 $conexao->close();
+?>

@@ -3,6 +3,7 @@ include 'assets/conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,19 +16,30 @@ include 'assets/conexao.php';
 </head>
 
 <body>
-    
+
     <!------ Include the above in your HEAD tag ---------->
 
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
 
-            <!-- Icon -->
+            <!-- Logo -->
             <div class="fadeIn first">
                 <img src="img/logo.png" id="icon" alt="User Icon" />
             </div>
 
-            <!-- Login Form -->
+            <!-- Aviso -->
+            <?php
+            if(isset($_SESSION['verifique'])):
+            ?>
+            <div class="fadeIn first">
+                <h1>Verifique suas credenciais</h1>
+            </div>
+            <?php
+            endif;
+            unset($_SESSION['verifique']);
+            ?>
+            <!-- Formulario -->
             <form action="assets/verificar.php" method="POST">
                 <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="Usuário">
                 <input type="text" id="password" class="fadeIn third" name="password" placeholder="Senha">
